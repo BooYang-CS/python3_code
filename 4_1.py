@@ -95,3 +95,13 @@ def prod(L):
 	return reduce(lambda x,y:x*y,L)
 L=[3,4,5,6]
 print('3*4*5*6=',prod(L))
+'''
+练习3：利用map和reduce编写一个str2float函数，把字符串'1234.456'转换成浮点数1234.456
+'''
+from functools import reduce 
+def fn(x,y):
+	return x*10+y
+def str2float(s):
+	L=s.split('.')#split方法切割字符串为列表,reduce函数的第一个参数是函数，该函数有两个参数
+	return reduce(fn,map(int,L[0]))+reduce(fn,map(int,L[1]))/(10**len(L[1]))#python中**表示幂运算
+print(str2float('1234.45456'))
