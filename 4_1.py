@@ -36,7 +36,10 @@ while True:
 	except StopIteration:
 		break;
 '''
-#方法1和方法2不能同时调用，因为r是属于Iterator,不断的调用next()函数按需计算系一个数据，当获得最后一个数据后，会抛出StopIteration异常。如果再次调用next()函数，会不起作用
+'''
+方法1和方法2不能同时调用，因为r是属于Iterator,不断的调用next()函数按需计算系一个数据，当获得最后一个数据后，
+会抛出StopIteration异常。如果再次调用next()函数，会不起作用
+'''
 print(list(map(str,[1,2,3,4,5,6,7])))
 '''
 reduce函数，reduce把一个函数作用在一个序列[x1,x2,x3,x4,..]上，这个函数必须接受两个参数，
