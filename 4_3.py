@@ -63,7 +63,7 @@ def count():
 	for i in range(1,4):
 		def f():
 			return i*i
-		fs.append(f)
+		fs.append(f)#没有立刻执行
 	return fs
 f1,f2,f3=count()
 print(f1())
