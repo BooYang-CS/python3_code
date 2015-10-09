@@ -48,4 +48,61 @@ bart2=Student('youyo',89)
 lisa=Student('yiyi',81)
 bart2.age=8#绑定一个名为age的数据。
 print(bart2.age)
-print(lisa.age)#实例lisa没有绑定age数据，会报错
+#print(lisa.age)#实例lisa没有绑定age数据，会报错
+
+#访问限制
+#从Student类的定义来看，外部代码还是可以自由修改一个实例的name和score属性
+bart3=Student('popo',89)
+print(bart3.score)
+bart3.score=81
+print(bart3.score)
+"""
+如果要让内部属性不被外部访问，可以把属性的名称前面加上两个下划线__,在python中，实例的
+变量名如果以__开头，就变成了一个私有变量，只允许内部访问，不允许外部访问
+"""
+class Student(object):
+	def __init__(self,name,score):
+		self.__name=name
+		self.__score=score
+	def print_score(self):
+		print('%s:%s' % (self.__name,self.__score))
+bart4=Student('Bart lili',67)
+#print(bart4.__name)#无法从外部访问实例变量.__name和实例变量.__score
+'''
+如果外部代码要获取name和score，可以给Student类增加get_name和get_score方法,又要允许外部代码修改score，
+可以给Student类增加set_score方法.
+'''
+class Student(object):
+	def __init__(self,name,score):
+		self.__name=name
+		self.__score=score
+	def print_score(self):
+		print('%s:%s' % (self.__name,self.__score))
+	def get_name(self):#允许外部代码访问
+		return self.__name
+	def get_score(self):
+		return self.__score
+	def set_score(self,score):#允许外部代码修改属性，引入此方法可以对参数做检查，避免传入无效参数
+		self.__score=score
+	def set_score1(self,score):
+		if 0<=score<=100:
+			self.__score=score
+		else:
+			raise ValueError('bad score')
+bart5=Student('gaoxin',81)
+print(bart5.get_score())
+print(bart5.get_name())
+bart5.set_score(90)
+print(bart5.get_score())
+bart5.set_score1(99)
+print(bart5.get_score())
+#bart5.set_score1(111)
+'''
+在python中，变量名类似__XXX__的，以双下划线开头和结尾的是特殊变量，特殊变量可以直接访问，不是private变量
+但看到一单下划线开头的实例变量名_xxx,这样的实例变量名外部可以访问，但是按照约定，这样的变量可以访问，但是
+将其视为私有变量，不要随意访问。
+以双下划线开头的实例变量是不是一定不能从外部访问，其实也不是，不能访问是因为python解释器对外把__name变量
+改成了_Student__name，所以可以通过_Student__name来访问__name变量，但强烈不建议这么做，因为不同版本的python解释器
+会把__name改成不同的变量名。
+'''
+print(bart5._Student__name)
