@@ -104,7 +104,13 @@ for i in range(10):
 		print('task queue is Empty')
 #处理结束
 print('worker exit..')
-
+'''
+1. task_master.py 和task_worker.py是一个简单的分布式计算，把代码稍加修改启动多个worker，就可以把任务
+分布到几台甚至几十台机器上，比如把计算n*n的代码换成发送邮件，就实现了邮件队列的异步发送。
+2. 注意到task_worker.py中根本没有创建Queue的代码，所以，Queue对象存储在task_master.py进程中。
+3. Queue之所以能通过网络访问，就是通过QueueManager实现的。由于QueueManager管理的不止一个Queue，
+所以，要给每个Queue的网络调用接口起个名字，比如get_task_queue。
+'''
 
 
 
