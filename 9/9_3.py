@@ -111,22 +111,3 @@ print('worker exit..')
 3. Queue之所以能通过网络访问，就是通过QueueManager实现的。由于QueueManager管理的不止一个Queue，
 所以，要给每个Queue的网络调用接口起个名字，比如get_task_queue。
 '''
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
